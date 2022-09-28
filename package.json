@@ -4,9 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "serve -s build",
-    "server": "nodemon server",
-    "heroku-postbuild": "npm run build"
+    "start": "node server",
+    "server": "nodemon server"
   },
   "author": "Olek",
   "license": "ISC",
