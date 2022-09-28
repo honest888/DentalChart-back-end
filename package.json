@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
+    "start": "serve -s build",
     "server": "nodemon server",
     "heroku-postbuild": "npm run build"
   },
