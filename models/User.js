@@ -15,10 +15,12 @@ const UserSchema = new mongoose.Schema({
   country: {
     type: String,
   },
-  phone: {
-    type: String,
-    required: true,
-  },
+  phone: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
   email: {
     type: String,
     required: true,
@@ -54,6 +56,14 @@ const UserSchema = new mongoose.Schema({
   color: {
     type: String,
   },
+  guarantor: {
+    type: String,
+  },
+  group: [
+    {
+      type: String,
+    },
+  ],
 });
 
 module.exports = mongoose.model("user", UserSchema);

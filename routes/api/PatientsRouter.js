@@ -6,20 +6,22 @@ const User = require("../../models/User");
 
 router.post(
   "/",
-  check("name", "Name is required").notEmpty(),
-  check("email", "Please include a valid email").isEmail(),
-  check("card_no", "card_no is required").notEmpty(),
-  check("phone", "Phone is required").notEmpty(),
+  // check("name", "Name is required").notEmpty(),
+  // check("email", "Please include a valid email").isEmail(),
+  // check("card_no", "card_no is required").notEmpty(),
+  // check("phone", "Phone is required").notEmpty(),
   async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
+    console.log(req.body);
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //   return res.status(400).json({ errors: errors.array() });
+    // }
 
     const {
       name,
       birthday,
       card_no,
+      guarantor,
       country,
       phone,
       email,
@@ -30,9 +32,11 @@ router.post(
       address2,
       city,
       province,
-      pastal,
+      postal_code,
       avatar,
       color,
+      tax,
+      group,
     } = req.body;
 
     try {
@@ -48,6 +52,7 @@ router.post(
         name,
         birthday,
         card_no,
+        guarantor,
         country,
         phone,
         email,
@@ -58,9 +63,11 @@ router.post(
         address2,
         city,
         province,
-        pastal,
+        postal_code,
         avatar,
         color,
+        tax,
+        group,
       });
 
       await user.save();
@@ -74,6 +81,7 @@ router.post(
 );
 
 router.get("/", async (req, res) => {
+  console.log("GGGGG");
   try {
     const users = await User.find({});
     res.json(users);
