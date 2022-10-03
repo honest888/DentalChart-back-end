@@ -6,16 +6,15 @@ const User = require("../../models/User");
 
 router.post(
   "/",
-  // check("name", "Name is required").notEmpty(),
-  // check("email", "Please include a valid email").isEmail(),
-  // check("card_no", "card_no is required").notEmpty(),
-  // check("phone", "Phone is required").notEmpty(),
+  check("name", "Name is required").notEmpty(),
+  check("email", "Please include a valid email").isEmail(),
+  check("card_no", "card_no is required").notEmpty(),
   async (req, res) => {
     console.log(req.body);
-    // const errors = validationResult(req);
-    // if (!errors.isEmpty()) {
-    //   return res.status(400).json({ errors: errors.array() });
-    // }
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
     const {
       name,
@@ -81,7 +80,6 @@ router.post(
 );
 
 router.get("/", async (req, res) => {
-  console.log("GGGGG");
   try {
     const users = await User.find({});
     res.json(users);
@@ -90,5 +88,22 @@ router.get("/", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+router.get(
+  "/:user_id",
+  // checkObjectId("user_id"),
+  async ({ params: { user_id } }, res) => {
+    try {
+      const profile = await User.findById(user_id);
+
+      if (!profile) return res.status(400).json({ msg: "Profile not found" });
+
+      return res.json(profile);
+    } catch (err) {
+      console.error(err.message);
+      return res.status(500).json({ msg: "Server error" });
+    }
+  }
+);
 
 module.exports = router;
