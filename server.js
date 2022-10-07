@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/api/users", require("./routes/api/PatientsRouter"));
+app.use("/api/teeth", require("./routes/api/TeethRouter"));
 
 const PORT = process.env.PORT || 5000;
 

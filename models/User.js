@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const teeth = require("./Teeth");
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
