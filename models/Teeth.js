@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
-const user = require("./User");
-
 const TeethSchema = new mongoose.Schema({
-  userId: { type: mongoose.Types.ObjectId, ref: "user", require: true },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+  },
   data: [
     {
       toothId: {
